@@ -1,0 +1,161 @@
+
+.Selperfil{
+    margin: 0%;
+   margin-top:1rem;
+   margin-bottom: 1rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Selperfil label{
+    margin: 0%;
+   
+    display:flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+.upload-label {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    border-color: black 1px;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+    color: white;
+    text-align: center;
+    line-height: 200px;
+    cursor: pointer;
+    overflow: hidden; 
+    /* Evita que la imagen se desborde */
+}
+
+.profile-image {
+    max-width: 100%;
+     /* Limita el ancho máximo de la imagen */
+    max-height: 100%; 
+    /* Limita la altura máxima de la imagen */
+    border-radius: 15px;
+    object-fit: cover} 
+    /* Mantiene la relación de aspecto y recorta la imagen si es */
+
+.ButtClass, h3{
+    height: 5rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+button{
+    width: 45%;
+    background-color: black;
+    color: white;
+    font-family: "Bebas Neue", sans-serif;
+    border-radius: 15px;
+    height: 4rem;
+    
+}
+button a{
+    color: white;
+    text-decoration: none;
+}
+.Select h2{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.SelectProd{
+    width: 100%;
+    margin: 5px;
+    display: flex;
+    display: inline-block;
+    justify-content: center;
+    text-align: center;
+
+}
+.SelectProd button{
+    margin-bottom: 10px;
+    margin-left: 5px;
+    width: 45%;
+    background-color: black;
+    color: white;
+    font-family: "Bebas Neue", sans-serif;
+    border-radius: 15px;
+    height: 4rem;
+    /* border: 1px solid #ed0808; */
+    cursor: pointer;
+}
+ .SelectProd button.selected {
+    background-color: white;
+    color: black;
+    border-color: black;
+     /* translate: 10px;  */
+   }  
+  /* .SelectProd button.selected:hover {
+    background-color: white;
+    color: black;
+  } */
+
+.Publicidad{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.FinAndTerm{
+   
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.Terms{
+    display: flex;
+    margin: 0%;
+    width: 60%;
+}
+.Terms input{
+    width: 10%;
+}
+.Terms label{
+    width: 30%;
+    font-size: 15px;
+    margin-left: 0%;
+}
+
+.Fin {
+    background-color: #000000;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .Fin:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }  
+ 
+.volver{
+    margin-top: 15px;
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Bebas Neue", sans-serif;
+    
+}
+.volver button{
+    width: 40% ;
+    display:flex;
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+    font-family: "Bebas Neue", sans-serif;
+    color: black;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+}
+.volver button a{
+    color: black;
+}

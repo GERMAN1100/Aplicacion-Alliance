@@ -1,0 +1,30 @@
+.Final{
+    background-color: black;
+    height: 100vh; /* 100% de la altura de la ventana del navegador */
+    width: 100vw; /* 100% de la anchura de la ventana del navegador */
+    
+
+}
+.Body-Fin {
+    background-color: black;
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+   height: 100%;
+  }
+.Body-F{
+
+    width: 80%;
+    height: 20rem;
+    background-color: white;
+    display: flex;
+    display: block;
+    justify-content: center;
+    text-align: center;
+    border-radius: 15px;
+}
+img{
+    max-width: 60px;
+    max-height: 60px;
+}

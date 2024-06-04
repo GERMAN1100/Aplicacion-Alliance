@@ -1,0 +1,26 @@
+body{
+    font-family: "Bebas Neue", sans-serif;
+}
+.loadtitle h1{
+    display: flex;
+    height: 32rem;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;
+    font-size: 96px;
+    background-color: white;
+}
+
+.loadfoot h2{
+    font-size: 70px;
+
+}
+
+.loadfoot h4{
+    font-size: 40px;
+
+}
+.loadfoot{
+    display: flex;
+    display: block;
+    text-align: center;
+}

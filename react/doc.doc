@@ -1,0 +1,47 @@
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import '../css/presentation.css'; 
+
+const Registro = () => {
+  const [aceptado, setAceptado] = useState(false);
+  const navigate = useNavigate();
+
+  // Estados y funciones para manejar los datos del formulario aquí...
+
+  const handleFinalizar = async () => {
+    if (aceptado) {
+      // Aquí puedes agregar la lógica para guardar los datos
+      try {
+        const response = await fetch('http://localhost:3000/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            // Aquí envías los datos del formulario
+          }),
+        });
+
+        if (response.ok) {
+          // Si la solicitud fue exitosa, redirige a la página final
+          navigate('/final');
+        } else {
+          // Si la solicitud falla, muestra un mensaje de error
+          console.error('Error al guardar los datos:', response.statusText);
+          alert('Error al guardar los datos. Por favor, inténtalo de nuevo.');
+        }
+      } catch (error) {
+        console.error('Error al enviar la solicitud:', error);
+        alert('Error al enviar la solicitud. Por favor, inténtalo de nuevo.');
+      }
+    } else {
+      alert("Debes aceptar los términos y condiciones");
+    }
+  };
+
+  return (
+    // Tu JSX del formulario aquí...
+  );
+};
+
+export default Registro;

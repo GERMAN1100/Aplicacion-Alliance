@@ -1,0 +1,5 @@
+explicacion de los (event.target.value)
+e: En este contexto, e representa el objeto del evento (event object). Cuando ocurre un evento (como hacer clic en un elemento), se crea un objeto de evento que contiene información sobre ese evento. El objeto e contiene detalles como el tipo de evento, el objetivo del evento (el elemento en el que ocurrió el evento) y otros datos relevantes.
+e.target: Esto se refiere al elemento HTML en el que ocurrió el evento. En este caso, estamos interesados en el checkbox, por lo que e.target se refiere al checkbox.
+e.target.checked: Este es un atributo booleano que indica si el checkbox está marcado o no. Si el checkbox está marcado, e.target.checked será true; si no está marcado, será false.
+En resumen, e.target.checked nos permite verificar si el usuario ha marcado o desmarcado el checkbox. Si es true, significa que el usuario ha aceptado los términos y condiciones.

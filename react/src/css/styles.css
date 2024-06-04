@@ -1,0 +1,49 @@
+/* Reset de estilos y configuración global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+/*   
+ body {
+  
+   
+    background: white;
+  
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 25px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  
+    
+    
+  } */
+  
+  /* Estilos específicos para tus elementos */
+  /* ul {
+    list-style: none;
+    padding: none;
+    margin: none;
+  } */
+  button{
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+  }
+  /* input{
+    font-size: 20px;
+    width: 100px;
+    height: 50px;
+    margin: 10px;
+   } */
+  /* select{
+    font-size: 25px;
+    height: 40px;
+    margin: 10px;
+  } */
+  /* option{
+    font-size: 30px;
+  } */
+  
+  

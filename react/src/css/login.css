@@ -1,0 +1,112 @@
+*{
+    margin: 0%;
+}
+.Title{
+   
+  
+    font-family: "Bebas Neue", sans-serif;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0%;
+    height: 7rem;
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+.Title h1{
+    font-size: 96px;
+}
+.Body{
+    margin: 0%;
+    font-family: "Bebas Neue", sans-serif;
+    display:flex;
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+
+.Inicio{
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 10rem;
+    
+
+}
+.Inicio h1{
+    font-size: 32px;
+}
+form{
+    width: 100%;
+    display:flex;
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+
+label{
+
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 20px;
+    width: 100%;
+    display:flex;
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+input{
+    margin: 0%;
+    border-radius: 15px;
+    border-color: rgb(170, 170, 166);
+    font-size: 32px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+}
+.InitSes{
+    width: 300px;
+    font-family: "Bebas Neue", sans-serif;
+    color: white;
+    background-color: black;
+    border-radius: 15px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+}
+.Access{
+    width: 100%;
+    display:flex;
+    display: block;
+    align-items: center;
+    justify-content: center;
+
+}
+.Access h2{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.ButtonAcces{
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    height: 7rem;
+
+   
+}
+.InitAccess{
+    width: 300px;
+    font-family: "Bebas Neue", sans-serif;
+    color: black;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+
+}
