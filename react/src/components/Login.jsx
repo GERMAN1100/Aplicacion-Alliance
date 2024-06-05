@@ -35,14 +35,20 @@ const Login = () => {
       const { token } = response.data;
       console.log('Token received:', token); // Verifica que se haya recibido el token
       localStorage.setItem('token', token);
-      console.log('Token stored in localStorage'); // Verifica que se haya almacenado el token
-      const decodedToken = JSON.parse(atob(token.split('.')[1]));
-      navigate(`/perfil/${decodedToken.userId}`);
+      // console.log('Token stored in localStorage'); // Verifica que se haya almacenado el token
+      const userId = jwt.decode(token).userId; // Decodifica el token para obtener el userId
+      localStorage.setItem('userId', userId);
+      // const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      navigate(`/perfil/${userId}`);
     } catch (error) {
-      console.error('Error:', error);
-      setError('Invalid email or password. Please try again.');
+      if (error.response) {
+        setError(`Error: ${error.response.status} - ${error.response.data.message}`);
+      } else if (error.request) {
+        setError('Error: No response received from server');
+      } else {
+        setError(`Error: ${error.message}`);
+      }
     }
-    
   };
 
   return (

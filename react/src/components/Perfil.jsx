@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-
 const Perfil = () => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
@@ -15,12 +14,11 @@ const Perfil = () => {
 
     const fetchUser = async () => {
       if (!token) {
-        setError('no token found');
+        setError('No token found');
         return;
       }
       try {
-        // Utilizar userId en la URL de la solicitud
-        const response = await axios.get(`http://localhost:3001/perfil/${userId}`, {
+        const response = await axios.get(`http://localhost:3000/perfil/${userId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -39,7 +37,7 @@ const Perfil = () => {
 
     fetchUser();
   }, [id]);
-  
+
   if (error) {
     return <div>{error}</div>;
   }

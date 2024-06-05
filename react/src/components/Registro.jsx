@@ -60,13 +60,7 @@ const Registro = () => {
   const handleCheckboxChange = (e) => {
     setAceptado(e.target.checked);
   };
-  // const handleSeleccion = (opcionSeleccionada) => {
-  //   setCategorias((prevCategorias) =>
-  //     prevCategorias.includes(opcionSeleccionada)
-  //       ? prevCategorias.filter((categoria) => categoria !== opcionSeleccionada)
-  //       : [...prevCategorias, opcionSeleccionada]
-  //   );
-  // };
+
   const handleSeleccion = (categoria) => {
     // Verificar si la categoría ya está seleccionada
     if (categorias.includes(categoria)) {
@@ -80,7 +74,8 @@ const Registro = () => {
   const handleCatalogoChange = (event) => {
     setLinkCatalogo(event.target.value);
   };
-  const handleFinalizar = async () => {
+  const handleFinalizar = async (event) => {
+    event.preventDefault();
     if (aceptado) {
       try {
         const response = await fetch("http://localhost:3000/registro", {
@@ -104,14 +99,16 @@ const Registro = () => {
             linkCatalogo,
           }),
         });
+  
         if (response.ok) {
-          const data =  await response.json();
-          const { token } =  await response.json(); // Desestructura el token de la respuesta JSON
+          const data = await response.json();
+          const { token, userId } = data; // Asume que la respuesta contiene token y userId
+  
           localStorage.setItem('token', token);
-          localStorage.setItem("userId", data.userId);
-          navigate(`/final/${data.userId}`); 
+          localStorage.setItem("userId", userId);
+          // navigate(`/final/${userId}`);        ---------------------VER ESTO, YA QUE NO ME TIRA LA PAGINA CUANDO APRETO FINALIZAR, PERO SI ANDA PERFIL
+            navigate(`/final`);
         } else {
-          // Si la solicitud falla, muestra un mensaje de error
           console.error("Error al guardar los datos:", response.statusText);
           alert("Error al guardar los datos. Por favor, inténtalo de nuevo.");
         }

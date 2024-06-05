@@ -21,7 +21,7 @@ app.post('/login', async (req, res) => {
     const user = await Usuario.findOne({ where: { email } });
     if (user) {
       const passwordMatch = await bcrypt.compare(password, user.password);
-      console.log('Password match:', passwordMatch); // Agregar este log
+      console.log('Password match:', passwordMatch);
 
       if (passwordMatch) {
         const token = jwt.sign({ userId: user.id, email: user.email }, secretKey, { expiresIn: '1h' });
@@ -37,6 +37,37 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ message: 'An error occurred', error });
   }
 });
+// -----------------------------------------DEBUGGING
+
+// app.post('/login', async (req, res) => {
+//   const { email, password } = req.body;
+//   console.log('Received login request with:', { email, password });
+
+//   try {
+//     const user = await Usuario.findOne({ where: { email } });
+//     console.log('User found:', user);
+
+//     if (user) {
+//       const passwordMatch = await bcrypt.compare(password, user.password);
+//       console.log('Password match:', passwordMatch);
+
+//       if (passwordMatch) {
+//         const token = jwt.sign({ userId: user.id, email: user.email }, secretKey, { expiresIn: '1h' });
+//         res.json({ message: 'Login successful', token });
+//       } else {
+//         res.status(401).json({ message: 'Invalid email or password' });
+//       }
+//     } else {
+//       res.status(401).json({ message: 'Invalid email or password' });
+//     }
+//   } catch (error) {
+//     console.error('An error occurred:', error);
+//     res.status(500).json({ message: 'An error occurred', error });
+//   }
+// });
+
+// -------------------------------------------------------
+
 
 // Middleware para autenticar el token comentarrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 const authenticateToken = (req, res, next) => {
@@ -69,9 +100,10 @@ app.get('/perfil/:id', authenticateToken, async (req, res) => {
 });
 
 // Ruta para registrar un nuevo usuario
+// Ruta para registrar un nuevo usuario
 app.post('/registro', async (req, res) => {
   const { email, password, tel, ubicacion, ciudad, OtroTel, document, presentacion, linkWeb, linkInstagram, linkFacebook, linkCatalogo, categorias } = req.body;
- 
+
   try {
     const existingUser = await Usuario.findOne({ where: { email } });
     if (existingUser) {
@@ -93,7 +125,9 @@ app.post('/registro', async (req, res) => {
       linkCatalogo,
       categorias
     });
-    res.status(201).json({ message: 'Usuario registrado exitosamente', user: { id: newUser.id, email: newUser.email } });
+
+    const token = jwt.sign({ userId: newUser.id, email: newUser.email }, secretKey, { expiresIn: '1h' });
+    res.status(201).json({ message: 'Usuario registrado exitosamente', userId: newUser.id, token });
   } catch (error) {
     console.error('Error al registrar usuario:', error);
     res.status(500).json({ message: 'Error al registrar usuario' });
