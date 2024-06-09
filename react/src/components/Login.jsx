@@ -17,17 +17,9 @@ const Login = () => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
-  const validarCorreoElectronico = (correo) => {
-    const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regexCorreo.test(correo);
-  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!validarCorreoElectronico(email)) {
-      setError('Por favor, introduce un correo electrónico válido.');
-      return;
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
       const response = await axios.post('http://localhost:3000/login', { email, password });
@@ -35,17 +27,18 @@ const Login = () => {
       const { token } = response.data;
       console.log('Token received:', token); // Verifica que se haya recibido el token
       localStorage.setItem('token', token);
-      // console.log('Token stored in localStorage'); // Verifica que se haya almacenado el token
       const userId = jwt.decode(token).userId; // Decodifica el token para obtener el userId
       localStorage.setItem('userId', userId);
-      // const decodedToken = JSON.parse(atob(token.split('.')[1]));
       navigate(`/perfil/${userId}`);
     } catch (error) {
       if (error.response) {
+        console.error('Server responded with error:', error.response.data); // Imprime el error detallado
         setError(`Error: ${error.response.status} - ${error.response.data.message}`);
       } else if (error.request) {
+        console.error('No response received from server:', error.request); // Imprime el detalle de la solicitud
         setError('Error: No response received from server');
       } else {
+        console.error('Error setting up request:', error.message); // Imprime el mensaje de error
         setError(`Error: ${error.message}`);
       }
     }
@@ -58,6 +51,7 @@ const Login = () => {
       </div>
       <div className='Body'>
         <div className='Inicio'><h1>Iniciar Sesión</h1></div>
+
         <form onSubmit={handleSubmit}>
           <div className='email'>
             <label htmlFor="email">Email</label>
@@ -66,7 +60,6 @@ const Login = () => {
               id="email"
               value={email}
               onChange={handleEmailChange}
-              autoComplete="current-email"
               required
             />
           </div>
@@ -77,7 +70,6 @@ const Login = () => {
               id="password"
               value={password}
               onChange={handlePasswordChange}
-              autoComplete="current-password"
               required
             />
           </div>

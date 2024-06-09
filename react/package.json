@@ -1,12 +1,20 @@
 {
   "scripts": {
-    "start": "react-scripts start"
-  },
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+},
+  
   "dependencies": {
     "axios": "^1.7.2",
+    "buffer": "^6.0.3",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.7",
     "nodemon": "^3.1.0",
@@ -15,7 +23,9 @@
     "react-router-dom": "^6.23.1",
     "react-scripts": "^5.0.1",
     "sequelize": "^6.37.3",
-    "styled-components": "^6.1.11"
+    "stream": "^0.0.2",
+    "styled-components": "^6.1.11",
+    "util": "^0.12.5"
   },
   "browserslist": {
     "production": [
@@ -28,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-app-rewired": "^2.2.1"
   }
 }
