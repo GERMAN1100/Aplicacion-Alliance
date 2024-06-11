@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
 import '../css/login.css';
-
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -21,24 +21,27 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log('Email:', email);
+    console.log('Password:', password);
+
     try {
       const response = await axios.post('http://localhost:3000/login', { email, password });
-      console.log('Response from server:', response); // Verifica la respuesta del servidor
+      console.log('Response from server:', response);
       const { token } = response.data;
-      console.log('Token received:', token); // Verifica que se haya recibido el token
+      console.log('Token received:', token);
       localStorage.setItem('token', token);
-      const userId = jwt.decode(token).userId; // Decodifica el token para obtener el userId
+      const userId = jwt.decode(token).userId;
       localStorage.setItem('userId', userId);
       navigate(`/perfil/${userId}`);
     } catch (error) {
       if (error.response) {
-        console.error('Server responded with error:', error.response.data); // Imprime el error detallado
+        console.error('Server responded with error:', error.response.data);
         setError(`Error: ${error.response.status} - ${error.response.data.message}`);
       } else if (error.request) {
-        console.error('No response received from server:', error.request); // Imprime el detalle de la solicitud
+        console.error('No response received from server:', error.request);
         setError('Error: No response received from server');
       } else {
-        console.error('Error setting up request:', error.message); // Imprime el mensaje de error
+        console.error('Error setting up request:', error.message);
         setError(`Error: ${error.message}`);
       }
     }

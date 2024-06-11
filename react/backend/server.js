@@ -17,6 +17,11 @@ app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   console.log('Received login request with:', { email, password });
 
+  if (!email || !password) {
+    console.error('Email or password not provided');
+    return res.status(400).json({ message: 'Email or password not provided' });
+  }
+
   try {
     const user = await Usuario.findOne({ where: { email } });
     console.log('User found:', user);
@@ -26,7 +31,7 @@ app.post('/login', async (req, res) => {
       console.log('Password match:', passwordMatch);
 
       if (passwordMatch) {
-        const token = jwt.sign({ userId: user.id, email: user.email }, secretKey, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user.id, email: user.email }, secretKey, { expiresIn: '2h' });
         console.log('Generated token:', token);
         res.json({ message: 'Login successful', token });
       } else {
@@ -42,6 +47,7 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ message: 'An error occurred', error: error.message });
   }
 });
+
 
 // Middleware para autenticar el token
 const authenticateToken = (req, res, next) => {
