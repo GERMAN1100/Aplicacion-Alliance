@@ -4,22 +4,33 @@ import "../css/registro.css";
 
 const Registro = () => {
   const [email, setEmail] = useState("");
+  const [nombreUsuario, setNomUsu] = useState("");
+  const [descripcion, setDescrip] = useState("");
   const [password, setPassword] = useState("");
   const [tel, setTel] = useState("");
   const [ubicacion, setUbication] = useState("");
-  const [image, setImage] = useState(null);
+  const [imagenPerfil, setImagenPerfil] = useState(null);
   const [ciudad, setCiudad] = useState("");
-  const [OtroTel, setOtroTel] = useState("");
-  const [document, setCuitDoc] = useState("");
-  const [Text, setPresent] = useState("");
+  const [otroTel, setOtroTel] = useState("");
+  const [documento, setCuitDoc] = useState("");
+  const [present, setPresent] = useState("");
   const [linkweb, setWeb] = useState("");
   const [linkInst, setIg] = useState("");
-  const [linkFace, setFace] = useState("");
+  const [linkFacebook, setFace] = useState("");
   const [aceptado, setAceptado] = useState(false);
   const [categorias, setCategorias] = useState([]);
   const [linkCatalogo, setLinkCatalogo] = useState("");
+  const [userId, setUserId] = useState(null); 
   const navigate = useNavigate();
 
+  const handleNomUsuChange = (event) => {
+    setNomUsu(event.target.value);
+  };
+
+  const handleDescChange = (event) => {
+    setDescrip(event.target.value)
+  };
+  
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -32,10 +43,29 @@ const Registro = () => {
   const handleUbicationChange = (event) => {
     setUbication(event.target.value);
   };
+  // const handleImageChange = (event) => {
+  //   const selectedImage = event.target.files[0];
+  //   setImage(URL.createObjectURL(selectedImage));
+  // };
+
   const handleImageChange = (event) => {
     const selectedImage = event.target.files[0];
-    setImage(URL.createObjectURL(selectedImage));
+    if (selectedImage) {
+      try {
+        setImagenPerfil(selectedImage);
+      } catch (error) {
+        console.error('Error setting image:', error);
+        // Handle error
+      }
+    } else {
+      console.error('No image selected');
+      // Handle case where no image is selected
+    }
   };
+  
+
+
+
   const handleCiudadChange = (event) => {
     setCiudad(event.target.value);
   };
@@ -78,36 +108,61 @@ const Registro = () => {
     event.preventDefault();
     if (aceptado) {
       try {
+        // const response = await fetch("http://localhost:3000/registro", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     nombreUsuario,
+        //     descripcion,
+        //     email,
+        //     password,
+        //     tel,
+        //     ubicacion,
+        //     ciudad,
+        //     otroTel,
+        //     documento,
+        //     present: present,
+        //     linkWeb: linkweb,
+        //     linkInstagram: linkInst,
+        //     linkFacebook: linkFacebook,
+        //     categorias,
+        //     linkCatalogo,
+        //   }),
+        // });
+        const formData = new FormData();
+        formData.append("nombreUsuario", nombreUsuario);
+        formData.append("descripcion", descripcion);
+        formData.append("email", email);
+        formData.append("password", password);
+        formData.append("tel", tel);
+        formData.append("ubicacion", ubicacion);
+        formData.append("ciudad", ciudad);
+        formData.append("otroTel", otroTel);
+        formData.append("documento", documento);
+        formData.append("present", present);
+        formData.append("linkWeb", linkweb);
+        formData.append("linkInstagram", linkInst);
+        formData.append("linkFacebook", linkFacebook);
+        formData.append("categorias", categorias);
+        // formData.append("categorias", JSON.stringify(categorias));
+        formData.append("linkCatalogo", linkCatalogo);
+        formData.append("ImagenPerfil", imagenPerfil);
+
         const response = await fetch("http://localhost:3000/registro", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-            tel,
-            ubicacion,
-            ciudad,
-            OtroTel,
-            document,
-            presentacion: Text,
-            linkWeb: linkweb,
-            linkInstagram: linkInst,
-            linkFacebook: linkFace,
-            categorias,
-            linkCatalogo,
-          }),
+          body: formData,
         });
+
+
   
         if (response.ok) {
           const data = await response.json();
-          const { token, userId } = data; // Asume que la respuesta contiene token y userId
-  
-          localStorage.setItem('token', token);
-          localStorage.setItem("userId", userId);
-          // navigate(`/final/${userId}`);        ---------------------VER ESTO, YA QUE NO ME TIRA LA PAGINA CUANDO APRETO FINALIZAR, PERO SI ANDA PERFIL
-            navigate(`/final`);
+          
+          const { userId } = data; // Asumiendo que el servidor devuelve el ID de usuario
+          setUserId(userId); // Guardar el ID de usuario en el estado local
+          navigate(`/final`);
         } else {
           console.error("Error al guardar los datos:", response.statusText);
           alert("Error al guardar los datos. Por favor, inténtalo de nuevo.");
@@ -123,25 +178,49 @@ const Registro = () => {
   return (
     <div>
       <div className="Selperfil">
-        <input
-          type="file"
-          accept="images/*"
-          onChange={handleImageChange}
-          style={{ display: "none" }}
-          id="upload-file"
-        />
-        <label htmlFor="upload-file" className="upload-label">
-          {image ? (
-            <img src={image} alt="Profile" className="profile-image" />
-          ) : (
-            <div className="ImgPerf">
-              <p>Selecciona una imagen de perfil</p>
-            </div>
-          )}
-        </label>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageChange}
+        style={{ display: 'none' }}
+        id="upload-file"
+      />
+      <label htmlFor="upload-file" className="upload-label">
+        {imagenPerfil ? (
+          <img
+            src={URL.createObjectURL(imagenPerfil)}
+            alt="Perfil"
+            className="profile-image"
+          />
+        ) : (
+          <div className="ImgPerf">
+            <p>Selecciona una imagen de perfil</p>
+          </div>
+        )}
+      </label>
       </div>
       <div className="Form">
         <form onSubmit={handleFinalizar}>
+         <div className="nomUsuario">
+            <label htmlFor="nombreUsuario">Nombre</label>
+            <input
+              type="text"
+              id="nombreUsuario"
+              value={nombreUsuario}
+              onChange={handleNomUsuChange}
+              required
+            />
+          </div>
+          <div className="descripcion">
+            <label htmlFor="descripcion">Descripción</label>
+            <input
+              type="text"
+              id="descripcion"
+              value={descripcion}
+              onChange={handleDescChange}
+              required
+            />
+          </div>
           <div className="email">
             <label htmlFor="email">Email</label>
             <input
@@ -173,7 +252,7 @@ const Registro = () => {
             <input
               type="tel"
               id="OtroTel"
-              value={OtroTel}
+              value={otroTel}
               onChange={handleOtroTelChange}
               required
             />
@@ -197,7 +276,7 @@ const Registro = () => {
             <input
               type="text"
               id="cuitordoc"
-              value={document}
+              value={documento}
               onChange={handleCuitOrDocChange}
               required
             />
@@ -205,7 +284,7 @@ const Registro = () => {
             <input
               type="text"
               id="present"
-              value={Text}
+              value={present}
               onChange={handlePresentChange}
               required
             />
@@ -229,7 +308,7 @@ const Registro = () => {
             <input
               type="url"
               id="linkFace"
-              value={linkFace}
+              value={linkFacebook}
               onChange={handleFaceChange}
               required
             />

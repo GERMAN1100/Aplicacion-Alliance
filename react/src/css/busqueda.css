@@ -1,0 +1,101 @@
+.body-head{
+ display: flex;
+ justify-content: space-around;
+}
+.body-head .nameApp{
+
+    height: 100px;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+.body-head .nameApp .All{
+   
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.body-head .nameApp .All h1{
+    color: rgb(31, 30, 30);
+    font-size: 40px;
+    letter-spacing: 1px;
+}
+
+.body-head .nameApp .All p{
+    
+    font-size: 25px;
+    margin-top: 10px;
+    height: auto;
+    color: grey;
+    letter-spacing: 2px;
+} 
+
+.body-head .img-perfil{
+    height: 100px;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-head .img-perfil .sect-img{
+    height: 80px;
+    width: 70%;
+    border: 2px solid black;
+}
+
+.buscador{
+    margin-bottom:  30px;
+}
+
+.SectorBuscador{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+   
+}
+
+
+.SectPerfil{
+    
+    margin: 10px;
+    border: 2px rgb(228, 224, 224) solid;
+    border-radius: 10%;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2) ;
+    display: inline-flex;
+    justify-content: center;
+    width: 150px;
+    height: 200px;
+    
+}
+
+.SectPerfil .Perfil{
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+} 
+
+.SectPerfil .Perfil .imgenPerfil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+}
+.SectPerfil .Perfil .imgenPerfil .profile-image{
+    width: 100px;
+    height: 100px;
+}
+.SectPerfil .Perfil .NomUsuario h3{
+    display:flex ;
+    justify-content: start;
+    height: 20px;
+}
